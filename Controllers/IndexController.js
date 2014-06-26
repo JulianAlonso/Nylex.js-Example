@@ -1,4 +1,4 @@
-var Controller = require("../Controller");
+var Controller = require("../Nylex/Controller");
 var controller = new Controller();
 
 controller.get("/", function(req, res){

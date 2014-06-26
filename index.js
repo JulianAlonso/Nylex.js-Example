@@ -1,5 +1,5 @@
 
-var nylex = require("./Nilex");
+var nylex = require("./Nylex/Nilex");
 
 //Controllers
 var indexController = require("./Controllers/IndexController");
