@@ -19,6 +19,8 @@ nylex.static("/public", "./public");
 
 //Mounting a before function, before all request, must be writed before the controllers.
 nylex.before("/*", function(req, res, next) {
+
+    //Do logging...
     console.log("Before function called");
     next();
 });

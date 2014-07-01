@@ -4,9 +4,15 @@ var Person = require("../Models/Person");
 //Creating a new Controller
 var personController = new Controller();
 
+//Very easy and restfull routing:
+personController.get("/person", getAllPersons);
+personController.post("/person", addPerson);
+personController.get("/person/:person_id", getPersonById);
+personController.put("/person/:person_id", updatePersonById);
+personController.delete("/person/:person_id", deletePersonById);
 
-//Adding get function to a route.
-personController.get("/person", function(req, res){
+//Get - Get all persons
+function getAllPersons(req, res){
     //Getting all persons from bdd
     Person.find(function (err, persons) {
         //Checking error.
@@ -15,11 +21,11 @@ personController.get("/person", function(req, res){
         res.json(persons);
     })
 
-});
+}
 
 
-//Adding post function to a route.
-personController.post("/person", function (req, res){
+//Post to add a person
+function addPerson(req, res){
 
     //Getting the post data
     var name = req.body.name;
@@ -43,7 +49,58 @@ personController.post("/person", function (req, res){
                 });
     });
 
-});
+}
+
+//Get function for a simple person with id.
+function getPersonById(req, res) {
+    //Getting person by id
+    Person.findById(req.params.person_id, function (err, person) {
+        //Check error
+        if (err) res.send(err);
+
+        //Send json person
+        res.json(person);
+
+    })
+};
+
+//Updating a person
+function updatePersonById(req, res) {
+
+    Person.findById(req.params.person_id, function(err, person) {
+
+        if (err) res.send(err);
+
+        person.name = req.body.name; //Update person name.
+
+        //Saving the person
+        person.save(function (err, person) {
+
+            if (err) res.send(err);
+
+            res.json({
+                    message : "Person updated!",
+                    person : person
+                    })
+        })
+    })
+
+};
+
+//Deleting a person by id
+function deletePersonById(req, res) {
+    Person.remove({
+        _id : req.params.person_id
+    }, function (err) {
+
+        if (err) res.send(err);
+
+        res.json({
+                message : "Deleted person!"
+                })
+
+    })
+}
 
 
 //Always we need export the controller.
