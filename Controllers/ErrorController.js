@@ -5,6 +5,7 @@ var errorController = {
 
     "303" : anotherError,
 
+    "nullData" : nullDataError,
 }
 
 //Mapping 404 error, we only need function with req and res
@@ -20,7 +21,14 @@ function notFound(req, res) {
 function anotherError(err, req, res, next) {
 
     res.send("Error: %s", err.code);
-    next();
+
+}
+
+//Mapping custom error throwed by IndexController:
+function nullDataError(err, req, res, next) {
+
+    res.json({ message: "Null data error"});
+
 }
 
 module.exports = errorController;

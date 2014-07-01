@@ -1,8 +1,17 @@
-
 var nylex = require("./Nylex/Nilex");
+var mongoose = require("mongoose");
+
+//Connecting mongoose
+mongoose.connect("mongodb://localhost/example", function (err, res) {
+    if (err)
+        console.log("Error connecting to database: \n" + err);
+    else
+        console.log("Connected to database!");
+});
 
 //Controllers
 var indexController = require("./Controllers/IndexController");
+var personController = require("./Controllers/PersonController");
 var errorController = require("./Controllers/ErrorController");
 
 //Setting static folder.
@@ -14,8 +23,9 @@ nylex.before("/*", function(req, res, next) {
     next();
 });
 
-//Mounting a simple controller.
+//Mounting controllers.
 nylex.mount("/", indexController);
+nylex.mount("/API", personController);
 
 //Mounting simple error controller.
 nylex.mountError(errorController);

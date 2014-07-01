@@ -1,5 +1,6 @@
-//Import "Controller"
+//Import "Controller" and "Person"
 var Controller = require("../Nylex/Controller");
+var Person = require("../Models/Person");
 //Creating a new Controller
 var controller = new Controller();
 
@@ -10,14 +11,20 @@ controller.get("/", function(req, res){
     res.send("Hello world");
 });
 
-
 //Adding post function to a route.
 controller.post("/", function (req, res){
 
-    //Post Data
+    //Getting the post data
     var name = req.body.name;
-    //Sending post data like a string.
-    res.send("NAME: " + name);
+
+    //Sending the post data
+    if (name != null) {
+        res.send("NAME: " + name);
+    } else {
+        //Throwing custom error for null data
+        controller.app.throwError("nullData");
+        //we can catch error in ErrorController.
+    }
 
 });
 
