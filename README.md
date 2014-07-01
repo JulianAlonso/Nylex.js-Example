@@ -12,15 +12,17 @@ Example of project with Nylex.js
 ## Thrwoing and catching by easy way custom errors!
   
   At index controller: 
+   
     -- Throw the error
     controller.app.throwError("nullData");
   
   At Error Controller:   
+  
     -- Catch the error
     "nullData" : functionToCatchTheError
     
-  function functionToCatchTheError(err, req, res, next) {
-    res.send(err);
-  }
+    function functionToCatchTheError(err, req, res, next) {
+      res.send(err);
+    }
   
 
