@@ -1,4 +1,4 @@
-var nylex = require("./Nylex/Nilex");
+var nylex = require("nylex");
 var mongoose = require("mongoose");
 
 //Connecting mongoose

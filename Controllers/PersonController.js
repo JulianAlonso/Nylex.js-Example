@@ -1,5 +1,5 @@
 //Import "Controller" and "Person"
-var Controller = require("../Nylex/Controller");
+var Controller = require("nylex-controller");
 var Person = require("../Models/Person");
 //Creating a new Controller
 var personController = new Controller();
